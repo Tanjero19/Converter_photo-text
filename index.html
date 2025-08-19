@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>OCR Converter</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="hero">
+    <h1>Фото → Текст</h1>
+    <p>Точный конвертер изображений в текст с умной предобработкой ✨</p>
+  </header>
+
+  <main class="wrap card">
+    <section class="uploader">
+      <div id="drop" class="drop" tabindex="0" aria-label="Область загрузки">
+        <input id="file" type="file" accept="image/*" hidden>
+        <button id="pick" class="btn pri">Загрузить фото</button>
+        <p>или перетащите изображение сюда, либо вставьте из буфера (Ctrl/⌘+V)</p>
+      </div>
+      <canvas id="cv" class="preview" aria-label="Предпросмотр" hidden></canvas>
+    </section>
+
+    <section class="controls">
+      <label>Язык:
+        <select id="lang">
+          <option value="rus+eng">Русский + English</option>
+          <option value="rus">Русский</option>
+          <option value="eng">English</option>
+        </select>
+      </label>
+      <label>PSM:
+        <select id="psm">
+          <option value="6">6 — Блок текста</option>
+          <option value="7">7 — Одна строка</option>
+          <option value="3">3 — Авто (кратно)</option>
+        </select>
+      </label>
+      <label class="chk"><input type="checkbox" id="hq" checked> Усиленная обработка</label>
+    </section>
+
+    <section class="actions">
+      <button id="run" class="btn pri">Распознать</button>
+      <button id="reset" class="btn ghost">Сбросить</button>
+    </section>
+
+    <section class="progress" id="progBox" hidden>
+      <div class="bar"><span id="bar" style="width:0%"></span></div>
+      <div class="note" id="note">Готовим модель…</div>
+    </section>
+
+    <section class="result">
+      <textarea id="out" rows="8" placeholder="Здесь появится распознанный текст…" readonly></textarea>
+      <button id="copy" class="btn">Скопировать</button>
+    </section>
+  </main>
+
+  <footer class="foot">Работает локально в вашем браузере с помощью Tesseract.js</footer>
+</body>
+</html>
